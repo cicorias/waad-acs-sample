@@ -2,6 +2,12 @@
 # Windows Azure Active Directory Module for Windows PowerShell cmdlets (http://aka.ms/aadposh)
 # Windows Azure PowerShell (http://go.microsoft.com/?linkid=9811175)
 # A local folder C:\Temp
+# You should run the WAADConfig.ps1 script first
+
+# You must provide: 
+# - Your WAAD tenant name
+# - Your ACS namespace name
+# - Your ACS management key
 
 # To work with WAAD
 Import-Module MSOnline
