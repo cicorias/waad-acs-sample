@@ -1,6 +1,7 @@
 ﻿# Prerequisites:
 # Windows Azure Active Directory Module for Windows PowerShell cmdlets (http://aka.ms/aadposh)
 # Windows Azure PowerShell (http://go.microsoft.com/?linkid=9811175)
+# A local folder C:\Temp
 
 # To work with WAAD
 Import-Module MSOnline
