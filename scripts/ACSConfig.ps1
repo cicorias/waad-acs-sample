@@ -19,6 +19,9 @@ $WAADName = '[your WAAD tenant name]'
 $ACSNamespace = '[your ACS namespace name]'
 $ACSManagementkey = '[your ACS Management Key]'
 
+# Connect to WAAD - use the credentials for the Global Administrator you created when you created your WAAD tenant
+Connect-MsolService
+
 $ACSServiceAddress = "https://$ACSNamespace.accesscontrol.windows.net/"
 $WAADTenantId = (Get-MsolCompanyInformation | Select -ExpandProperty ObjectId).ToString()
 $WAADFederationMetaDataAddress = "https://login.windows.net/$WAADTenantId/federationmetadata/2007-06/federationmetadata.xml"
@@ -27,9 +30,6 @@ $AppAddress = 'https://localhost:44300/'
 $RelyingPartyName = 'MyWebApp'
 $IdentityProviderName = 'WAAD'
 $RuleGroupName = 'WAADRuleGroup'
-
-# Connect to WAAD - use the credentials for the Global Administrator you created when you created your WAAD tenant
-Connect-MsolService
 
 #  Configure an Identity Provider, a Relying Party, and a Rule Group in your ACS Namespace
 Invoke-WebRequest -Uri $WAADFederationMetaDataAddress -OutFile $FedFile
