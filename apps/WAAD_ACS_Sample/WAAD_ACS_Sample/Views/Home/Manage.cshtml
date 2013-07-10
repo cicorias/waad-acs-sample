@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Manage";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+@if (ViewBag.Authorized)
+{
+    <p>Only authenticated users in the Managers role can see this!</p>
+}
+@if (!ViewBag.Authorized)
+{
+    <p>It doesn't look like you're a Manager...</p>
+}
