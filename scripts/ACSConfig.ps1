@@ -33,8 +33,8 @@ $RuleGroupName = 'WAADRuleGroup'
 
 #  Configure an Identity Provider, a Relying Party, and a Rule Group in your ACS Namespace
 Invoke-WebRequest -Uri $WAADFederationMetaDataAddress -OutFile $FedFile
-Add-IdentityProvider -Type WsFederation -WsFederationMetadata $FedFile -AllowedRelyingParties $RelyingPartyName -LoginLinkText "WAAD Login" -ManagementKey $ACSManagementkey -Name $IdentityProviderName -Namespace $ACSNamespace
-Add-RelyingParty -Name $RelyingPartyName -AllowedIdentityProviders $IdentityProviderName -ManagementKey $ACSManagementkey -Namespace $ACSNamespace -Realm $AppAddress -ReturnUrl $AppAddress -TokenFormat SAML_2_0 -RuleGroupName $RuleGroupName
+Add-IdentityProvider -Type WsFederation -WsFederationMetadata $FedFile -AllowedRelyingParties @($RelyingPartyName) -LoginLinkText "WAAD Login" -ManagementKey $ACSManagementkey -Name $IdentityProviderName -Namespace $ACSNamespace
+Add-RelyingParty -Name $RelyingPartyName -AllowedIdentityProviders @($IdentityProviderName) -ManagementKey $ACSManagementkey -Namespace $ACSNamespace -Realm $AppAddress -ReturnUrl $AppAddress -TokenFormat SAML_2_0 -RuleGroupName $RuleGroupName
 Add-DefaultPassthroughRules -GroupName $RuleGroupName -IdentityProviderName $IdentityProviderName  -ManagementKey $ACSManagementkey -Namespace $ACSNamespace
 Add-Rule -GroupName $RuleGroupName -IdentityProviderName $IdentityProviderName -Description "Assign Mary Jones to the Managers role" -InputClaimType http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name -InputClaimValue "maryj@$WAADName.onmicrosoft.com" -ManagementKey $ACSManagementkey -Namespace $ACSNamespace -OutputClaimType http://schemas.microsoft.com/ws/2008/06/identity/claims/role -OutputClaimValue Managers
 Add-Rule -GroupName $RuleGroupName -IdentityProviderName $IdentityProviderName -Description "Assign Fred Bloggs to the Users role" -InputClaimType http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name -InputClaimValue "fredb@$WAADName.onmicrosoft.com" -ManagementKey $ACSManagementkey -Namespace $ACSNamespace -OutputClaimType http://schemas.microsoft.com/ws/2008/06/identity/claims/role -OutputClaimValue Users
