@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<!-- Standard Meta -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Site Properities -->
+	<title>Configuring ACS | Your Website</title>
+	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
+	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
+
+	<!-- DocPad Meta -->
+	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+
+	<!-- DocPad Styles + Our Own -->
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+
+	<!-- Icons -->
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/icons/favicon.ico" />
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
+	<!-- For first- and second-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
+	<!-- For iPhone with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
+	<!-- For third-generation iPad with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+
+  <header>
+    <nav>
+      <li class="fork"><a href="https://github.com/dominicbetts/playground">View On GitHub</a></li>
+      <li class="downloads"><a href="https://github.com/dominicbetts/playground/zipball/master">ZIP</a></li>
+      <li class="downloads"><a href="https://github.com/dominicbetts/playground/tarball/master">TAR</a></li>
+      <li class="title">DOWNLOADS</li>
+    </nav>
+  </header><!-- end header -->
+  
+  <div id="header-content">
+    <span class="credits left">Project maintained by <a href="https://github.com/dominicbetts">dominicbetts</a></span>
+    <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+    <div id="title">
+          <h1>WAAD ACS Sample</h1>
+          <p>Configuring ACS</p>
+          <hr/>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="sidebar-left">
+      <nav class="pagemenu">
+        
+          <li class="active">
+            <a href="./index.html">
+              Welcome
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./prereqs.html">
+              Prerequisites
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./overview.html">
+              Overview
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./config.html">
+              Initial Configuration
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configwaad.html">
+              Configuring WAAD
+            </a>
+          </li>
+        
+          <li class="inactive">
+            <a href="./configacs.html">
+              Configuring ACS
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configwebsite.html">
+              Configuring the Website
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./identityproviders.html">
+              Enabling additional identity providers
+            </a>
+          </li>
+        
+      </nav>
+    </div>
+    <div class="content">
+      <section>
+        <article>
+          <p>After you have created your Windows Azure Active Directory (WAAD) tenant as described on the <a href="config.html">Initial configuration tasks</a>, and added some users and defined a Service Principal as described on the <a href="configwaad.html">Configuring WAAD</a> page, you can complete the setup of your Access Control Services (ACS) namespace.</p>
+<p>In the scenario addressed by this example application, the role of ACS is to apply a set of rules to add a <em>role</em> claim to an authenticated user&#39;s collection of claims. To do this you must configure the following elements:</p>
+<ul>
+<li>One or more <em>Identity Providers</em> that can authenticate users and generate an initial set of claims. In this scenario WAAD will be the identity provider (although later you may decide to add more identity providers such  as Microsoft ID or Google ID). ACS must trust any identity providers it uses.</li>
+<li>A collection of rules that examine the claims from the identity providers and then assign a new <em>role</em> claim that identifies the authenticated user as a <strong>User</strong> or <strong>Manager</strong>. The web application will use this <em>role</em> claim to control access to certain pages within the application.</li>
+<li>A <em>Relying Party</em> that identifies the application that will use these claims. In the scenario addressed by this application, the relying party will be the web application. The relying party must trust ACS.</li>
+</ul>
+<p>In addition to your WAAD tenant name, ACS namespace name, and the credentials of your global administrator, you also need your ACS Management key to run this script. You can find this key in the Windows Azure Management Portal.</p>
+<p>Click on the <strong>Manage</strong> link on the <strong>Access Control Namespaces</strong> page.
+<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey1.png" alt="Find ACS Management Key Step 1"></p>
+<p>Then click on the <strong>ManagementClient</strong> link on the <strong>Management Service</strong> page.
+<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey2.png" alt="Find ACS Management Key Step 2"></p>
+<p>Then click on the <strong>Password</strong> link.
+<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey3.png" alt="Find ACS Management Key Step 3"></p>
+<p>You can then find the password to use as your ACS Management Key.
+<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey4.png" alt="Find ACS Management Key Step 4"></p>
+<p>This PowerShell script is included in the repository <a href="https://github.com/dominicbetts/waad-acs-sample/blob/master/scripts/ACSConfig.ps1">here</a>.</p>
+<p>This script:</p>
+<ul>
+<li>Discovers your WAAD tenant ID (a GUID) that it uses to download a copy of the federation metadata for your WAAD service. The federation metadata includes all of the necessary information for ACS to integrate with WAAD.</li>
+<li>Uses the federation metadata to configure the identity provider in ACS.
+(This process is more straightforward if you complete it manually in the management portal: when you create the identity provider you can simply provide the URL of the WAAD federation metadata.)</li>
+<li>Defines a relying party. This will be the web application.</li>
+<li>Creates some default rules that pass through any claims from identity provider (WAAD) to the relying party (the web application).</li>
+<li>Adds custom rules to add Mary Jones into the Managers role and Fred Bloggs into the Users role.</li>
+<li>Creates a Service Principal that represents your ACS namespace in WAAD.</li>
+</ul>
+<pre class="highlighted"><code class="ruby"><span class="comment"># Prerequisites:</span>
+<span class="comment"># Windows Azure Active Directory Module for Windows PowerShell cmdlets (http://aka.ms/aadposh)</span>
+<span class="comment"># Windows Azure PowerShell (http://go.microsoft.com/?linkid=9811175)</span>
+<span class="comment"># A local folder C:\Temp</span>
+<span class="comment"># You should run the WAADConfig.ps1 script first</span>
+
+<span class="comment"># You must provide: </span>
+<span class="comment"># - Your WAAD tenant name</span>
+<span class="comment"># - Your ACS namespace name</span>
+<span class="comment"># - Your ACS management key</span>
+
+<span class="comment"># To work with WAAD</span>
+<span class="constant">Import</span>-<span class="constant">Module</span> <span class="constant">MSOnline</span>
+
+<span class="comment"># To work with ACS</span>
+<span class="constant">Import</span>-<span class="constant">Module</span> <span class="constant">WAPPSCmdlets</span>
+
+<span class="variable">$WAADName</span> = <span class="string">'[your WAAD tenant name]'</span>
+<span class="variable">$ACSNamespace</span> = <span class="string">'[your ACS namespace name]'</span>
+<span class="variable">$ACSManagementkey</span> = <span class="string">'[your ACS Management Key]'</span>
+
+<span class="comment"># Connect to WAAD - use the credentials for the Global Administrator you created when you created your WAAD tenant</span>
+<span class="constant">Connect</span>-<span class="constant">MsolService</span>
+
+<span class="variable">$ACSServiceAddress</span> = <span class="string">"https://$ACSNamespace.accesscontrol.windows.net/"</span>
+<span class="variable">$WAADTenantId</span> = (<span class="constant">Get</span>-<span class="constant">MsolCompanyInformation</span> | <span class="constant">Select</span> -<span class="constant">ExpandProperty</span> <span class="constant">ObjectId</span>).<span class="constant">ToString</span>()
+<span class="variable">$WAADFederationMetaDataAddress</span> = <span class="string">"https://login.windows.net/$WAADTenantId/federationmetadata/2007-06/federationmetadata.xml"</span>
+<span class="variable">$FedFile</span> = <span class="string">'C:\Temp\federationmetadata.xml'</span>
+<span class="variable">$AppAddress</span> = <span class="string">'https://localhost:44300/'</span>
+<span class="variable">$RelyingPartyName</span> = <span class="string">'MyWebApp'</span>
+<span class="variable">$IdentityProviderName</span> = <span class="string">'WAAD'</span>
+<span class="variable">$RuleGroupName</span> = <span class="string">'WAADRuleGroup'</span>
+
+<span class="comment">#  Configure an Identity Provider, a Relying Party, and a Rule Group in your ACS Namespace</span>
+<span class="constant">Invoke</span>-<span class="constant">WebRequest</span> -<span class="constant">Uri</span> <span class="variable">$WAADFederationMetaDataAddress</span> -<span class="constant">OutFile</span> <span class="variable">$FedFile</span>
+<span class="constant">Add</span>-<span class="constant">IdentityProvider</span> -<span class="constant">Type</span> <span class="constant">WsFederation</span> -<span class="constant">WsFederationMetadata</span> <span class="variable">$FedFile</span> -<span class="constant">AllowedRelyingParties</span> <span class="variable">$RelyingPartyName</span> -<span class="constant">LoginLinkText</span> <span class="string">"WAAD Login"</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Name</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span>
+<span class="constant">Add</span>-<span class="constant">RelyingParty</span> -<span class="constant">Name</span> <span class="variable">$RelyingPartyName</span> -<span class="constant">AllowedIdentityProviders</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">Realm</span> <span class="variable">$AppAddress</span> -<span class="constant">ReturnUrl</span> <span class="variable">$AppAddress</span> -<span class="constant">TokenFormat</span> <span class="constant">SAML_2_0</span> -<span class="constant">RuleGroupName</span> <span class="variable">$RuleGroupName</span>
+<span class="constant">Add</span>-<span class="constant">DefaultPassthroughRules</span> -<span class="constant">GroupName</span> <span class="variable">$RuleGroupName</span> -<span class="constant">IdentityProviderName</span> <span class="variable">$IdentityProviderName</span>  -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span>
+<span class="constant">Add</span>-<span class="constant">Rule</span> -<span class="constant">GroupName</span> <span class="variable">$RuleGroupName</span> -<span class="constant">IdentityProviderName</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">Description</span> <span class="string">"Assign Mary Jones to the Managers role"</span> -<span class="constant">InputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.xmlsoap.org/ws</span><span class="regexp">/2005/</span><span class="number">05</span>/identity/claims/name -<span class="constant">InputClaimValue</span> <span class="string">"maryj@$WAADName.onmicrosoft.com"</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">OutputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.microsoft.com/ws</span><span class="regexp">/2008/</span><span class="number">06</span>/identity/claims/role -<span class="constant">OutputClaimValue</span> <span class="constant">Managers</span>
+<span class="constant">Add</span>-<span class="constant">Rule</span> -<span class="constant">GroupName</span> <span class="variable">$RuleGroupName</span> -<span class="constant">IdentityProviderName</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">Description</span> <span class="string">"Assign Fred Bloggs to the Users role"</span> -<span class="constant">InputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.xmlsoap.org/ws</span><span class="regexp">/2005/</span><span class="number">05</span>/identity/claims/name -<span class="constant">InputClaimValue</span> <span class="string">"fredb@$WAADName.onmicrosoft.com"</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">OutputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.microsoft.com/ws</span><span class="regexp">/2008/</span><span class="number">06</span>/identity/claims/role -<span class="constant">OutputClaimValue</span> <span class="constant">Users</span>
+
+
+
+<span class="comment"># Remove ACS  if you want to tidy up</span>
+<span class="comment"># Remove-RuleGroup -Name $RuleGroupName -ManagementKey $ACSManagementkey -Namespace $ACSNamespace</span>
+<span class="comment"># Remove-RelyingParty -Name $RelyingPartyName -ManagementKey $ACSManagementkey -Namespace $ACSNamespace</span>
+<span class="comment"># Remove-IdentityProvider -Name $IdentityProviderName -ManagementKey $ACSManagementkey -Namespace $ACSNamespace</span></code></pre>
+<hr>
+<p>You can view the results of running this script in the Windows Azure Management Portal. You will also see that Windows Live ID is already included as an identity provider.</p>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACS.png" alt="ACS Management"></p>
+
+        </article>
+      
+      </section>
+    </div>
+  </div>
+
+  <footer>
+  </footer><!-- end footer -->  
+
+	<!-- jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\/script>')</script>
+
+	<!-- DocPad Scripts + Our Own -->
+	<script defer="defer"  src="./vendor/log.js"></script><script defer="defer"  src="./vendor/modernizr.js"></script><script defer="defer"  src="./scripts/script.js"></script>
+</body>
+</html>

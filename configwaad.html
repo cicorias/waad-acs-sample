@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Welcome | Your Website</title>
+	<title>Configuring WAAD | Your Website</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
@@ -51,7 +51,7 @@
     <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
     <div id="title">
           <h1>WAAD ACS Sample</h1>
-          <p>Welcome</p>
+          <p>Configuring WAAD</p>
           <hr/>
     </div>
   </div>
@@ -60,7 +60,7 @@
     <div class="sidebar-left">
       <nav class="pagemenu">
         
-          <li class="inactive">
+          <li class="active">
             <a href="./index.html">
               Welcome
             </a>
@@ -84,7 +84,7 @@
             </a>
           </li>
         
-          <li class="active">
+          <li class="inactive">
             <a href="./configwaad.html">
               Configuring WAAD
             </a>
@@ -119,9 +119,47 @@
     <div class="content">
       <section>
         <article>
-          <p>Welcome to the waad-acs-sample!</p>
-<p>The goal of this project is to provide a simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user&#39;s role membership, and the website will use the role to control access to pages within the site.</p>
-<p>The project will include sample code, PowerShell scripts, and a description of how the sample works.</p>
+          <p>A Service Principal represents a service that will use WAAD. In this example, the service that uses WAAD will be Access Control Services (ACS). When an unauthenticated user tries to access the web application, the user will be redirected to ACS, which will in turn redirect the user to WAAD to authenticate. In this scenario, WAAD has no knowledge of your web application, it only knows that it will receive requests for claims from ACS.</p>
+<p>This PowerShell script is included in the repository <a href="https://github.com/dominicbetts/waad-acs-sample/blob/master/scripts/WAADConfig.ps1">here</a>.</p>
+<p>This script: </p>
+<ul>
+<li>Authenticates with WAAD using the <code>Connect-MsolService</code> cmdlet.</li>
+<li>Creates a Service Principal that represents your ACS namespace in WAAD.</li>
+</ul>
+<p><strong>Note:</strong> The Service Principal is not visible in the Windows Azure Management Portal. When you create a WAAD <em>Application</em> in the management portal, WAAD also creates an associated Service Principal. In the scenario addressed by this sample, you don&#39;t need an Application definition, just a Service Principal definition.</p>
+<pre class="highlighted"><code class="php"><span class="comment"># Prerequisites:</span>
+<span class="comment"># Windows Azure Active Directory Module for Windows PowerShell cmdlets (http://aka.ms/aadposh)</span>
+
+<span class="comment"># To work with WAAD</span>
+Import-Module MSOnline
+
+<span class="variable">$WAADName</span> = <span class="string">'[your WAAD tenant name]'</span>
+<span class="variable">$ACSNamespace</span> = <span class="string">'[your ACS namespace name]'</span>
+<span class="variable">$ACSServiceAddress</span> = <span class="string">"https://$ACSNamespace.accesscontrol.windows.net/"</span>
+
+<span class="comment"># You may want to change this</span>
+<span class="variable">$UserPassword</span> = <span class="string">'P@ssw0rd!'</span>
+
+<span class="comment"># Display name for the Service Principal</span>
+<span class="variable">$ACS_SP_Name</span> = <span class="string">'ACS_SP'</span>
+
+<span class="comment"># Connect to WAAD - use the credentials for the Global Administrator you created when you created your WAAD tenant</span>
+Connect-MsolService
+
+<span class="comment"># Add some users that don't have to change their passwords when they first log on</span>
+<span class="keyword">New</span>-MsolUser -DisplayName <span class="string">"Fred Bloggs"</span> -FirstName Fred -LastName Bloggs -Password <span class="variable">$UserPassword</span> -UserPrincipalName <span class="string">"fredb@$WAADName.onmicrosoft.com"</span> -ForceChangePassword <span class="variable">$false</span>
+<span class="keyword">New</span>-MsolUser -DisplayName <span class="string">"Mary Jones"</span> -FirstName Mary -LastName Jones -Password <span class="variable">$UserPassword</span> -UserPrincipalName <span class="string">"maryj@$WAADName.onmicrosoft.com"</span> -ForceChangePassword <span class="variable">$false</span>
+
+<span class="comment"># Set up the ServicePrincipal</span>
+<span class="variable">$replyurl</span> = <span class="keyword">New</span>-MsolServicePrincipalAddresses -Address <span class="variable">$ACSServiceAddress</span>
+<span class="keyword">New</span>-MsolServicePrincipal -DisplayName <span class="variable">$ACS_SP_Name</span> -ServicePrincipalName @(<span class="variable">$ACSServiceAddress</span>) -Addresses <span class="variable">$replyurl</span>
+
+<span class="comment"># Remove WAAD Service Principal if you want to tidy up</span>
+<span class="comment"># Remove-MsolServicePrincipal -ServicePrincipalName $ACSServiceAddress</span></code></pre>
+<hr>
+<p>After you have run the script, you will be able to see the new users in the Windows Azure Management Portal as shown in the following screenshot:</p>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/Users.png" alt="Users Fred Blogs and Mary Jones"></p>
+<p>Although the service principal is not visible in the Windows Azure Management Portal, you can use the <code>Get-MsolServicePrincipal -All</code> PowerShell cmdlet to view all the configured service principals in your WAAD.</p>
 
         </article>
       

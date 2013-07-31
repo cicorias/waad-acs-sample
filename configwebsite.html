@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<!-- Standard Meta -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Site Properities -->
+	<title>Configuring the Website | Your Website</title>
+	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
+	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
+
+	<!-- DocPad Meta -->
+	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+
+	<!-- DocPad Styles + Our Own -->
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+
+	<!-- Icons -->
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/icons/favicon.ico" />
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
+	<!-- For first- and second-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
+	<!-- For iPhone with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
+	<!-- For third-generation iPad with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+
+  <header>
+    <nav>
+      <li class="fork"><a href="https://github.com/dominicbetts/playground">View On GitHub</a></li>
+      <li class="downloads"><a href="https://github.com/dominicbetts/playground/zipball/master">ZIP</a></li>
+      <li class="downloads"><a href="https://github.com/dominicbetts/playground/tarball/master">TAR</a></li>
+      <li class="title">DOWNLOADS</li>
+    </nav>
+  </header><!-- end header -->
+  
+  <div id="header-content">
+    <span class="credits left">Project maintained by <a href="https://github.com/dominicbetts">dominicbetts</a></span>
+    <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+    <div id="title">
+          <h1>WAAD ACS Sample</h1>
+          <p>Configuring the Website</p>
+          <hr/>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="sidebar-left">
+      <nav class="pagemenu">
+        
+          <li class="active">
+            <a href="./index.html">
+              Welcome
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./prereqs.html">
+              Prerequisites
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./overview.html">
+              Overview
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./config.html">
+              Initial Configuration
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configwaad.html">
+              Configuring WAAD
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configacs.html">
+              Configuring ACS
+            </a>
+          </li>
+        
+          <li class="inactive">
+            <a href="./configwebsite.html">
+              Configuring the Website
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./identityproviders.html">
+              Enabling additional identity providers
+            </a>
+          </li>
+        
+      </nav>
+    </div>
+    <div class="content">
+      <section>
+        <article>
+          <p>For this sample, the Website is a very simple ASP.NET MVC 4 web application. The Visual Studio solution was created by selecting the <strong>ASP.NET MVC 4 Web Application</strong> project template and then selecting the <strong>Intranet Application</strong> template. The project is initially configured to run on IIS Express.</p>
+<p>The following changes were made to the default project:</p>
+<ul>
+<li>The website was configured to use SSL, and the SSL address is used as the project URL.</li>
+<li>The <strong>Index</strong> action method in the <strong>HomeController</strong> class includes some code to read some claims data.</li>
+<li>The website has an additional <strong>Manage</strong> view that will only display information to users in the <strong>Managers</strong> role.</li>
+<li>The website has a <strong>SignOut</strong> view and controller. The controller requires the project to have references to <strong>System.IdentityModel</strong> and <strong>System.IdentityModel.Services</strong>.</li>
+</ul>
+<p>The version of the application that you can download from this repository has not been connected to Access Control Service (ACS). You can do this using the <strong>Identity and Access</strong> dialog in Visual Studio.</p>
+<h1>Configuring Identity and Access</h1>
+<p>In Visual Studio, you can access the <strong>Identity and Access</strong> dialog from the project&#39;s context menu in <strong>Solution Explorer</strong>.</p>
+<p>For this application, the users come from ACS (ACS in turn gets users from WAAD before adding the <em>role</em> claim.) Then click the <strong>Configure</strong> link.</p>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess01.png" alt="Identity and Access #1"></p>
+<p>Add your ACS namespace details using the same values you used in the script described on the <a href="configacs.html">Configuring ACS</a> page.</p>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess02.png" alt="Identity and Access #2"></p>
+<p>Click <strong>OK</strong> to save your changes and update the web.config file with all the required information.</p>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess03.png" alt="Identity and Access #3"></p>
+<p>Open the <strong>Identity and Access</strong> dialog again and then click on the <strong>Configuration</strong> tab. Choose <strong>Require HTTPS</strong> to ensure that all the claims interactions with ACS are encrypted. Choose <strong>Enable web farm ready cookies</strong> to ensure that the encryption used on the cookies will work if you choose to scale the application out in Windows Azure. Click <strong>OK</strong> to save your changes.</p>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess04.png" alt="Identity and Access #4"></p>
+<hr>
+<p>You can now test the web application by running it in Visual Studio. When you start debugging in Visual Studio, the web application is launched using IIS Express on your local machine. You should note the following when you run the application locally.</p>
+<ul>
+<li>Your web browser will warn you that the site&#39;s security certificate was not issued by a trusted certificate authority. Because this is a sample application, it is safe to continue. In a real application, you should use a certificate issued by a trusted certificate authority.</li>
+<li>You will be prompted to log on at <a href="https://login.microsoftonline.com/">https://login.microsoftonline.com/</a>. This is where your WAAD credentials can be verified. You should use either the <strong>Mary Jones</strong> or <strong>Fred Bloggs</strong> credentials you created on your domain when you ran the script described on the <a href="configwaad.html">Configuring WAAD</a> page. For example <strong>fredb@[your WAAD tenant name].onmicrosoft.com</strong>.</li>
+<li>The home page will use claim data to display a welcome message:</li>
+</ul>
+<pre class="highlighted"><code class="avrasm">public ActionResult Index()
+{
+  ClaimsPrincipal <span class="keyword">cp</span> = ClaimsPrincipal<span class="preprocessor">.Current</span><span class="comment">;</span>
+  var givenNameClaim = <span class="keyword">cp</span><span class="preprocessor">.FindFirst</span>(ClaimTypes<span class="preprocessor">.GivenName</span>)<span class="comment">;</span>
+  var surnameClaim = <span class="keyword">cp</span><span class="preprocessor">.FindFirst</span>(ClaimTypes<span class="preprocessor">.Surname</span>)<span class="comment">;</span>
+
+  if (givenNameClaim == null | surnameClaim == null)
+  {
+    ViewBag<span class="preprocessor">.Message</span> = string<span class="preprocessor">.Format</span>(<span class="string">"Oops, no useful claims available"</span>)<span class="comment">;</span>
+  }
+  else
+  {
+    string fullname =
+          string<span class="preprocessor">.Format</span>(<span class="string">"{0} {1}"</span>, givenNameClaim<span class="preprocessor">.Value</span>,
+          surnameClaim<span class="preprocessor">.Value</span>)<span class="comment">;</span>
+    ViewBag<span class="preprocessor">.Message</span> = string<span class="preprocessor">.Format</span>(<span class="string">"Dear {0}, welcome to the WAAD ACS Sample App"</span>,
+          fullname)<span class="comment">;</span>
+  }
+
+
+  return View()<span class="comment">;</span>
+}</code></pre>
+<ul>
+<li>The <strong>Manage</strong> page uses the <strong>Managers</strong> role to determine what to display (the role is obtained automatically from the user&#39;s claims):</li>
+</ul>
+<pre class="highlighted"><code class="objectivec"><span class="keyword">public</span> ActionResult Manage()
+{
+  ViewBag<span class="variable">.Authorized</span> = <span class="literal">false</span>;
+  <span class="keyword">if</span> (!User<span class="variable">.IsInRole</span>(<span class="string">"Managers"</span>))
+  {
+    ViewBag<span class="variable">.Message</span> = <span class="string">"You are not authorized for this page!"</span>;
+  }
+  <span class="keyword">else</span>
+  {
+    ViewBag<span class="variable">.Authorized</span> = <span class="literal">true</span>;
+    ViewBag<span class="variable">.Message</span> = <span class="string">"Your managers only page."</span>;
+  }
+
+  <span class="keyword">return</span> View();
+}</code></pre>
+
+        </article>
+      
+      </section>
+    </div>
+  </div>
+
+  <footer>
+  </footer><!-- end footer -->  
+
+	<!-- jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\/script>')</script>
+
+	<!-- DocPad Scripts + Our Own -->
+	<script defer="defer"  src="./vendor/log.js"></script><script defer="defer"  src="./vendor/modernizr.js"></script><script defer="defer"  src="./scripts/script.js"></script>
+</body>
+</html>

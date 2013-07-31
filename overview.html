@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Welcome | Your Website</title>
+	<title>Overview | Your Website</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
@@ -51,7 +51,7 @@
     <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
     <div id="title">
           <h1>WAAD ACS Sample</h1>
-          <p>Welcome</p>
+          <p>Overview</p>
           <hr/>
     </div>
   </div>
@@ -60,7 +60,7 @@
     <div class="sidebar-left">
       <nav class="pagemenu">
         
-          <li class="inactive">
+          <li class="active">
             <a href="./index.html">
               Welcome
             </a>
@@ -72,7 +72,7 @@
             </a>
           </li>
         
-          <li class="active">
+          <li class="inactive">
             <a href="./overview.html">
               Overview
             </a>
@@ -119,9 +119,29 @@
     <div class="content">
       <section>
         <article>
-          <p>Welcome to the waad-acs-sample!</p>
-<p>The goal of this project is to provide a simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user&#39;s role membership, and the website will use the role to control access to pages within the site.</p>
-<p>The project will include sample code, PowerShell scripts, and a description of how the sample works.</p>
+          <p>Windows Azure includes two services, Windows Azure Active Directory (WAAD) and Access Control Services (ACS), that you can use as part of a claims-based authentication and authorization infrastructure. This sample shows how you can quickly and easily configure these services and an ASP.NET MVC web application to enable users to authenticate using a variety of identity providers and use role-based authorization in the web application.</p>
+<h1>Claims</h1>
+<p>This example uses claims-based authentication and authorization. You can think of a claim as being a token issued by a trustworthy source that tells you something about the person (or system) who is submitting the claim. For example, your ASP.NET website might expect a user to submit claims specifying the username, email address, and organization. For the website to be able to trust these claims there must be a complex system in place that signs and encrypts the claims. WAAD and ACS provide most of this infrastructure for you and Visual Studio makes it easy to integrate a standard web application into this infrastructure with very little code. This claims-based approach is also based on standards which makes it very easy to integrate with other systems and identity providers.</p>
+<h1>The example application</h1>
+<p>The following diagram illustrates the relationships between the key elements of the system.
+<img src="./images/Overview.png" alt="Key elements"></p>
+<p>The diagram shows the direction of the trust relationships: the application trusts ACS, and ACS trusts WAAD. It also shows the sequence of activities associated with a user signing in to the application. In this example:</p>
+<ol>
+<li>The user authenticates with WAAD which issues a number of claims such as the name and email address of the authenticated user.</li>
+<li>The claims issued by WAAD are submitted to ACS which applies some transformation logic and issues an additional claim with the user&#39;s role.</li>
+<li>All of the claims issued by WAAD and ACS are submitted to the web application which uses those claims to customize the UI (showing the name of the logged on user) and to control access to different parts of the site (based on whether the user is in the <strong>Managers</strong> role or the <strong>Users</strong> role).</li>
+</ol>
+<p>There are some general points to note about this process.</p>
+<ul>
+<li>The user is largely unaware of WAAD and ACS. The user is simply presented with a sign-in page to enter their username and password when he or she tries to access the web application. A complex set of redirections takes place behind the scenes to ensure that the user authenticates and ACS gets to perform its role of transforming the set of claims issued by WAAD.</li>
+<li>It would be possible to customize WAAD to issue the <em>role</em> claim. However, we also want to extend the example to enable users to authenticate with a Microsoft ID or Google ID as alternatives to a WAAD ID. Therefore, using ACS to assign the <em>role</em> claim provides a single location for managing <em>roles</em> used in the web application.</li>
+</ul>
+<h1>References</h1>
+<ul>
+<li>For an introduction to claims-based authentication and authorization, see <a href="http://msdn.microsoft.com/en-us/library/ff423674.aspx">A Guide to Claims-Based Identity and Access Control</a></li>
+<li>For an overview of WAAD, see <a href="http://www.windowsazure.com/en-us/manage/services/identity/what-is-windows-azure-active-directory/">What is Windows Azure Active Directory?</a></li>
+<li>For an introduction to ACS, see <a href="http://msdn.microsoft.com/library/windowsazure/hh147631.aspx">Access Control Service 2.0</a></li>
+</ul>
 
         </article>
       

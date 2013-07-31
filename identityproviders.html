@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<!-- Standard Meta -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Site Properities -->
+	<title>Enabling additional identity providers | Your Website</title>
+	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
+	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
+
+	<!-- DocPad Meta -->
+	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+
+	<!-- DocPad Styles + Our Own -->
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+
+	<!-- Icons -->
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/icons/favicon.ico" />
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
+	<!-- For first- and second-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
+	<!-- For iPhone with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
+	<!-- For third-generation iPad with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+
+  <header>
+    <nav>
+      <li class="fork"><a href="https://github.com/dominicbetts/playground">View On GitHub</a></li>
+      <li class="downloads"><a href="https://github.com/dominicbetts/playground/zipball/master">ZIP</a></li>
+      <li class="downloads"><a href="https://github.com/dominicbetts/playground/tarball/master">TAR</a></li>
+      <li class="title">DOWNLOADS</li>
+    </nav>
+  </header><!-- end header -->
+  
+  <div id="header-content">
+    <span class="credits left">Project maintained by <a href="https://github.com/dominicbetts">dominicbetts</a></span>
+    <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+    <div id="title">
+          <h1>WAAD ACS Sample</h1>
+          <p>Enabling additional identity providers</p>
+          <hr/>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="sidebar-left">
+      <nav class="pagemenu">
+        
+          <li class="active">
+            <a href="./index.html">
+              Welcome
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./prereqs.html">
+              Prerequisites
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./overview.html">
+              Overview
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./config.html">
+              Initial Configuration
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configwaad.html">
+              Configuring WAAD
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configacs.html">
+              Configuring ACS
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./configwebsite.html">
+              Configuring the Website
+            </a>
+          </li>
+        
+          <li class="active">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
+          <li class="inactive">
+            <a href="./identityproviders.html">
+              Enabling additional identity providers
+            </a>
+          </li>
+        
+      </nav>
+    </div>
+    <div class="content">
+      <section>
+        <article>
+          <p>Currently, users can only authenticate with Windows Azure Active Directory to access the sample web site. If you want to enable additional identity providers, you can make the necessary configuration changes in Access Control Service (ACS).</p>
+<h3>Add identity providers such as Google, Yahoo! and Facebook to ACS.</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/additionIP01.png" alt="Adding IPs"></p>
+<h3>Configure the relying party to use the identity providers you selected.</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/additionIP02.png" alt="Updating RP"></p>
+<h3>Generate default rules to pass through claims from these identity providers to the relying party.</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/additionIP03.png" alt="Adding default rules #1">
+<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/additionIP04.png" alt="Adding default rules #2"></p>
+<p><strong>Note:</strong> The set of claims available from the other identity providers is much more limited that those available with WAAD. You&#39;ll also need to add any rules that will assign the <em>Manager</em> <em>role</em> claim to appropriate users.</p>
+<p>Alternatively, you could use the PowerShell script (available <a href="https://github.com/dominicbetts/waad-acs-sample/blob/master/scripts/AddIdentityProviders.ps1">here</a>) to make the changes:</p>
+<pre class="highlighted"><code class="php"><span class="comment"># Prerequisites:</span>
+<span class="comment"># Windows Azure PowerShell (http://go.microsoft.com/?linkid=9811175)</span>
+
+<span class="comment"># You must provide: </span>
+<span class="comment"># - Your ACS namespace name</span>
+<span class="comment"># - Your ACS management key</span>
+<span class="comment"># - The ACS name for your relying party</span>
+
+
+<span class="comment"># To work with ACS</span>
+Import-Module WAPPSCmdlets
+
+<span class="variable">$ACSNamespace</span> = <span class="string">'[your ACS namespace name]'</span>
+<span class="variable">$ACSManagementkey</span> = <span class="string">'[your ACS Management Key]'</span>
+<span class="variable">$RelyingPartyName</span> = <span class="string">'[the name of your relying party in ACS]'</span>
+
+<span class="variable">$WAADIdentityProvider</span> = <span class="string">'WAAD'</span>
+<span class="variable">$RuleGroupName</span> = <span class="string">'WAADRuleGroup'</span>
+
+<span class="comment"># Add the Google ID identity provider</span>
+Add-IdentityProvider -PreconfiguredIpType Google -Type Preconfigured -AllowedRelyingParties @(<span class="variable">$RelyingPartyName</span>) -LoginLinkText <span class="string">"Login with your Google account"</span> -ManagementKey <span class="variable">$ACSManagementkey</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+
+<span class="comment">#  Make sure all the identity providers are enabled for the relying party</span>
+<span class="variable">$waadip</span> = Get-IdentityProvider -ManagementKey <span class="variable">$ACSManagementkey</span> -Name <span class="variable">$WAADIdentityProvider</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+<span class="variable">$googleip</span> = Get-IdentityProvider -ManagementKey <span class="variable">$ACSManagementkey</span> -Name Google -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+<span class="variable">$liveip</span> = Get-IdentityProvider -ManagementKey <span class="variable">$ACSManagementkey</span> -Name <span class="string">'Windows Live ID'</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+
+<span class="variable">$relyingParty</span> = Get-RelyingParty -ManagementKey <span class="variable">$ACSManagementkey</span> -Name <span class="variable">$RelyingPartyName</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+<span class="variable">$relyingParty</span>.IdentityProviders = @(<span class="variable">$waadip</span>, <span class="variable">$googleip</span>, <span class="variable">$liveip</span>)
+Remove-RelyingParty -Name <span class="variable">$RelyingPartyName</span> -ManagementKey <span class="variable">$ACSManagementkey</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+Add-RelyingParty -RelyingParty <span class="variable">$relyingParty</span> -ManagementKey <span class="variable">$ACSManagementkey</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+
+<span class="comment"># Generate the default rules for the Google and Microsoft IDs</span>
+Add-DefaultPassthroughRules -GroupName <span class="variable">$RuleGroupName</span> -IdentityProviderName Google  -ManagementKey <span class="variable">$ACSManagementkey</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span>
+Add-DefaultPassthroughRules -GroupName <span class="variable">$RuleGroupName</span> -IdentityProviderName <span class="string">'Windows Live ID'</span>  -ManagementKey <span class="variable">$ACSManagementkey</span> -<span class="keyword">Namespace</span> <span class="variable">$ACSNamespace</span></code></pre>
+<hr>
+<h3>When an unauthenticated user visits the web site, they can choose how to authenticate.</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/additionIP05.png" alt="Choosing an IP"></p>
+
+        </article>
+      
+      </section>
+    </div>
+  </div>
+
+  <footer>
+  </footer><!-- end footer -->  
+
+	<!-- jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\/script>')</script>
+
+	<!-- DocPad Scripts + Our Own -->
+	<script defer="defer"  src="./vendor/log.js"></script><script defer="defer"  src="./vendor/modernizr.js"></script><script defer="defer"  src="./scripts/script.js"></script>
+</body>
+</html>

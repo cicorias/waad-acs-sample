@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Welcome | Your Website</title>
+	<title>Initial Configuration | Your Website</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
@@ -51,7 +51,7 @@
     <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
     <div id="title">
           <h1>WAAD ACS Sample</h1>
-          <p>Welcome</p>
+          <p>Initial Configuration</p>
           <hr/>
     </div>
   </div>
@@ -60,7 +60,7 @@
     <div class="sidebar-left">
       <nav class="pagemenu">
         
-          <li class="inactive">
+          <li class="active">
             <a href="./index.html">
               Welcome
             </a>
@@ -78,7 +78,7 @@
             </a>
           </li>
         
-          <li class="active">
+          <li class="inactive">
             <a href="./config.html">
               Initial Configuration
             </a>
@@ -119,9 +119,29 @@
     <div class="content">
       <section>
         <article>
-          <p>Welcome to the waad-acs-sample!</p>
-<p>The goal of this project is to provide a simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user&#39;s role membership, and the website will use the role to control access to pages within the site.</p>
-<p>The project will include sample code, PowerShell scripts, and a description of how the sample works.</p>
+          <p>There are two initial configuration tasks that you must complete manually in the Windows Azure Portal that at the time of writing did not appear to be scriptable.</p>
+<h1>1. Create your Windows Azure Active Directory (WAAD) tenant and add a new user in the &quot;Global Administrator&quot; role</h1>
+<p>To create your WAAD tenant and create an administrative user you can follow the instructions in the section <strong>Create a New Directory Tenant and Add a User</strong> on the page 
+<a href="http://msdn.microsoft.com/en-us/library/windowsazure/dn151790.aspx">Adding Sign-On to Your Web Application Using Windows Azure AD</a>.</p>
+<p><strong>Note:</strong> Make a note of your WAAD tenant name, you will need it when you customize the PowerShell scripts for your setup.</p>
+<p>There are some important points to be aware of when you complete these steps:</p>
+<ul>
+<li>Once you have created your WAAD tenant, you cannot change its name or delete it from your Windows Azure subscription. Make sure you choose a sensible name and one that you will not require later!</li>
+<li>The tenant you create defines a domain called <em>yourdomainname</em>.onmicrosoft.com.</li>
+<li>You will be using the user in the &quot;Global Administrator&quot; role when you run some of the PowerShell scripts later. You should change the automatically assigned password before you try to use the account from PowerShell by logging on at <a href="https://login.microsoftonline.com/login.srf">https://login.microsoftonline.com/login.srf</a>.</li>
+<li>When you have completed these steps, you will be able to use PowerShell to complete the remaining configuration steps for WAAD.</li>
+</ul>
+<h1>2. Define an Access Control Service (ACS) namespace</h1>
+<p>To create your ACS namespace you can follow the instructions on the page <a href="http://msdn.microsoft.com/en-us/library/windowsazure/hh674478.aspx">How to: Create an Access Control Namespace</a>.</p>
+<p><strong>Note:</strong> Make a note of your ACS namespace name, you will need it when you customize the PowerShell scripts for your setup.</p>
+<hr>
+<p>These screenshots illustrate what you should see in the Windows Azure Management portal after you have completed these configuration steps.</p>
+<h3>The WAAD Tenant</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/tenant.png" alt="The WAAD tenant"></p>
+<h3>The WAAD global administrator</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/adminusers.png" alt="The global administrator"></p>
+<h3>The ACS namespace</h3>
+<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSNamespace.png" alt="The ACS namespace"></p>
 
         </article>
       
