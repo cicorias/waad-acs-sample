@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Prerequisites | WAAD ACS Sample</title>
+	<title>Configuring Live Connect | WAAD ACS Sample</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
@@ -51,7 +51,7 @@
     <span class="credits right">Hosted on GitHub Pages &mdash; Based on theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
     <div id="title">
           <h1>WAAD ACS Sample</h1>
-          <p>Prerequisites</p>
+          <p>Configuring Live Connect</p>
           <hr/>
     </div>
     
@@ -67,7 +67,7 @@
             </a>
           </li>
         
-          <li class="inactive">
+          <li class="active">
             <a href="./prereqs.html">
               Prerequisites
             </a>
@@ -97,7 +97,7 @@
             </a>
           </li>
         
-          <li class="active">
+          <li class="inactive">
             <a href="./configlive.html">
               Configuring Live Connect
             </a>
@@ -134,39 +134,39 @@
             
             <!-- Get the current document, from there, we will be able to get the next and previous -->
             
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
          
                 <!-- We have the current document, do the next and previous buttons -->
                 
                 <!-- Check if we have a previous page -->
                 
-                    <a href="/index.html" class="paging previous">&lt; previous</a>
+                    <a href="/configacs.html" class="paging previous">&lt; previous</a>
                 
          
                 <!-- Check if we have a next page -->
                 
-                     <a href="/overview.html" class="paging next">next &gt;</a>
+                     <a href="/configwebsite.html" class="paging next">next &gt;</a>
                 
          
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
             
         
             
@@ -184,22 +184,14 @@
       </div>
       <section>
         <article>
-          <p>To deploy and run this sample you will need the following:</p>
-<ul>
-<li>A Windows Azure subscription for your Windows Azure Active Directory domain, your Access Control Services namespace, and to host your ASP.NET MVC website. You can sign up for a free trial subscription here: <a href="http://www.windowsazure.com/en-us/pricing/trial/">Windows Azure Free trial</a></li>
-<li>Windows Azure Active Directory Module for Windows PowerShell cmdlets <a href="http://aka.ms/aadposh">http://aka.ms/aadposh</a></li>
-</ul>
-<p>Installed using the <a href="http://www.microsoft.com/web/downloads/platform.aspx">Web Platform Installer</a>:</p>
-<ul>
-<li>Windows Azure Tools for Visual Studio (latest version)</li>
-<li>Windows Azure SDK (latest version)</li>
-<li>Windows Azure PowerShell (latest version)</li>
-<li>Windows Azure Libraries (latest version)</li>
-<li>Windows Identity Foundation </li>
-<li>IIS Express</li>
-<li>A <a href="http://msdn.microsoft.com/en-us/live/">Live Connect Developer Center</a> account to enable your web application to call the REST-based Live APIs to discover user data.</li>
-</ul>
-<p>This are just the Windows Azure related pieces. You&#39;ll also need the standard libraries/tools/SDKs for ASP.NET MVC web site development.</p>
+          <p>If the site is going to be able to retrieve user information from the Live servers when a user authenticates using Microsoft Account (Live) credentials, then you must configure a Live application at <a href="https://account.live.com/developers/applications/">Live Connect Developer Center</a>.</p>
+<p>This screenshot shows an example application:</p>
+<p><img src="./images/live01.png" alt="Live application settings"></p>
+<p>You can use any name you like for the application. The <strong>Client ID</strong> and <strong>Client secret</strong> are generated for you and you will need these when you configure the web application. The <strong>Redirect domain</strong> should be the domain name you use for the application. If you are running the application locally, you will need to edit you hosts file to use this domain. See <a href="configwebsite.html">Configuring the Website</a> for more information.</p>
+<p>If you need to modify these values, you can do so on the <strong>Edit settings</strong> page:</p>
+<p><img src="./images/live02.png" alt="Detailed Live application settings"></p>
+<hr>
+<p>For more information about Live Connect, see <a href="http://msdn.microsoft.com/en-us/live/">Welcome to the Live Connect Developer Center</a>.</p>
 
         </article>
       
@@ -214,39 +206,39 @@
             
             <!-- Get the current document, from there, we will be able to get the next and previous -->
             
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
          
                 <!-- We have the current document, do the next and previous buttons -->
                 
                 <!-- Check if we have a previous page -->
                 
-                    <a href="/index.html" class="paging previous">&lt; previous</a>
+                    <a href="/configacs.html" class="paging previous">&lt; previous</a>
                 
          
                 <!-- Check if we have a next page -->
                 
-                     <a href="/overview.html" class="paging next">next &gt;</a>
+                     <a href="/configwebsite.html" class="paging next">next &gt;</a>
                 
          
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
-            
-        
-            
-            <!-- Get the current document, from there, we will be able to get the next and previous -->
             
         
             

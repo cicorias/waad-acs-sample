@@ -10,15 +10,15 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Overview | Your Website</title>
+	<title>Overview | WAAD ACS Sample</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
 	<!-- DocPad Meta -->
-	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+	<meta http-equiv="X-Powered-By" content="DocPad v6.47.0"/>
 
 	<!-- DocPad Styles + Our Own -->
-	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/fonts.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -54,6 +54,7 @@
           <p>Overview</p>
           <hr/>
     </div>
+    
   </div>
 
   <div class="wrapper">
@@ -97,14 +98,14 @@
           </li>
         
           <li class="active">
-            <a href="./configwebsite.html">
-              Configuring the Website
+            <a href="./configlive.html">
+              Configuring Live Connect
             </a>
           </li>
         
           <li class="active">
-            <a href="./deploytoazure.html">
-              Deploying the Website to Windows Azure
+            <a href="./configwebsite.html">
+              Configuring the Website
             </a>
           </li>
         
@@ -114,17 +115,82 @@
             </a>
           </li>
         
+          <li class="active">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
       </nav>
     </div>
     <div class="content">
+      <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/prereqs.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+                     <a href="/config.html" class="paging next">next &gt;</a>
+                
+         
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+      </div>
       <section>
         <article>
           <p>Windows Azure includes two services, Windows Azure Active Directory (WAAD) and Access Control Services (ACS), that you can use as part of a claims-based authentication and authorization infrastructure. This sample shows how you can quickly and easily configure these services and an ASP.NET MVC web application to enable users to authenticate using a variety of identity providers and use role-based authorization in the web application.</p>
+<p><strong>This page provides an overview of some of the key features of the application. You can download the sample from GitHub and then follow the configuration and deployment steps using the pages in this site.</strong></p>
 <h1>Claims</h1>
 <p>This example uses claims-based authentication and authorization. You can think of a claim as being a token issued by a trustworthy source that tells you something about the person (or system) who is submitting the claim. For example, your ASP.NET website might expect a user to submit claims specifying the username, email address, and organization. For the website to be able to trust these claims there must be a complex system in place that signs and encrypts the claims. WAAD and ACS provide most of this infrastructure for you and Visual Studio makes it easy to integrate a standard web application into this infrastructure with very little code. This claims-based approach is also based on standards which makes it very easy to integrate with other systems and identity providers.</p>
 <h1>The example application</h1>
-<p>The following diagram illustrates the relationships between the key elements of the system.
-<img src="./images/Overview.png" alt="Key elements"></p>
+<p>The following diagram illustrates the relationships between the key elements of the system.</p>
+<p><img src="./images/Overview.png" alt="Key elements"></p>
 <p>The diagram shows the direction of the trust relationships: the application trusts ACS, and ACS trusts WAAD. It also shows the sequence of activities associated with a user signing in to the application. In this example:</p>
 <ol>
 <li>The user authenticates with WAAD which issues a number of claims such as the name and email address of the authenticated user.</li>
@@ -136,16 +202,88 @@
 <li>The user is largely unaware of WAAD and ACS. The user is simply presented with a sign-in page to enter their username and password when he or she tries to access the web application. A complex set of redirections takes place behind the scenes to ensure that the user authenticates and ACS gets to perform its role of transforming the set of claims issued by WAAD.</li>
 <li>It would be possible to customize WAAD to issue the <em>role</em> claim. However, we also want to extend the example to enable users to authenticate with a Microsoft ID or Google ID as alternatives to a WAAD ID. Therefore, using ACS to assign the <em>role</em> claim provides a single location for managing <em>roles</em> used in the web application.</li>
 </ul>
+<h1>Using the Live APIs</h1>
+<p>You can easily configure the sample to enable users to authenticate using either a Microsoft Account (Live Id) or a Google Account, for more information see <a href="identityproviders.html">Enable additional Identity Providers</a>. If a user authenticates using a Microsoft Account, then the Live servers only issue two claims (Name Identifier and Identity Provider) to ACS for ACS to pass on to your application. This means that you don&#39;t have access to the user&#39;s name in the web application to customize the UI. The sample illustrates an approach that you can take to query the Live servers for additional user information. The approach taken is using server side code rather than client side JavaScript: a JavaScript solution would probably be easier to implement, but would make it dificult to access the information on the server, where it might be useful for puposes other than simply displaying a welcome message to the user.</p>
+<p>The following sequence diagram shows how the web application obtains user data from the Live servers.</p>
+<p><img src="./images/LiveSequence.png" alt="Using data from Live"></p>
+<p>The numbers in the diagram are explained below:</p>
+<ol>
+<li>After the user has authenticated using Microsoft credentials through ACS and the Live servers, when the user browses to the web application, the web application checks for a Live authorization code. If there is no authorization code in the query string, the web application redirects the browser to the <strong><a href="https://login.live.com/oauth20_authorize.srf">https://login.live.com/oauth20_authorize.srf</a></strong> endpoint, including the current page address as the callback location, and the ClientId from your application&#39;s Live account.</li>
+<li>The request for an authorization code also includes the cookies that were created when the user first authenticated with Live. Therefore, the user does not need to re-authenticate and the Live servers return a redirect back to your application that includes the authorization code.</li>
+<li>The browser requests the home page in the web application for a second time, this time including the authorization code as a parameter in the query string.</li>
+<li>The web application uses the authorization code to request an access token from the <strong><a href="https://login.live.com/oauth20_token.srf">https://login.live.com/oauth20_token.srf</a></strong> endpoint on the Live servers.</li>
+<li>The web application uses the access token to request user data such as the current user&#39;s name and email address using the <strong><a href="https://apis.live.net/v5.0/">https://apis.live.net/v5.0/</a></strong> endpoint on the Live servers.</li>
+<li>The web application uses the user data to populate the web page that it returns to the user.</li>
+</ol>
 <h1>References</h1>
 <ul>
 <li>For an introduction to claims-based authentication and authorization, see <a href="http://msdn.microsoft.com/en-us/library/ff423674.aspx">A Guide to Claims-Based Identity and Access Control</a></li>
 <li>For an overview of WAAD, see <a href="http://www.windowsazure.com/en-us/manage/services/identity/what-is-windows-azure-active-directory/">What is Windows Azure Active Directory?</a></li>
 <li>For an introduction to ACS, see <a href="http://msdn.microsoft.com/library/windowsazure/hh147631.aspx">Access Control Service 2.0</a></li>
+<li>For an overview of the Live APIs, see <a href="http://msdn.microsoft.com/en-us/library/live/hh243650.aspx">Live API Reference</a></li>
 </ul>
 
         </article>
       
       </section>
+            <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/prereqs.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+                     <a href="/config.html" class="paging next">next &gt;</a>
+                
+         
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+      </div>
     </div>
   </div>
 

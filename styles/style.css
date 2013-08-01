@@ -286,6 +286,16 @@ header nav li.title {
   text-align: center;
 } 
 
+.paging {
+  font-size: 11px;
+}
+.paging.previous {
+  float: left;
+}
+.paging.next {
+  float: right;
+} 
+
 nav.pagemenu {
   list-style-type: none;
   margin: 0;
@@ -324,6 +334,7 @@ content: none;
 }*/
 
 section {
+  clear: both;
   padding: 10px 0px 50px 0px;
 }
 

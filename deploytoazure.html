@@ -10,15 +10,15 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Deploying the Website to Windows Azure | Your Website</title>
+	<title>Deploying the Website to Windows Azure | WAAD ACS Sample</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
 	<!-- DocPad Meta -->
-	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+	<meta http-equiv="X-Powered-By" content="DocPad v6.47.0"/>
 
 	<!-- DocPad Styles + Our Own -->
-	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/fonts.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -54,6 +54,7 @@
           <p>Deploying the Website to Windows Azure</p>
           <hr/>
     </div>
+    
   </div>
 
   <div class="wrapper">
@@ -97,14 +98,14 @@
           </li>
         
           <li class="active">
-            <a href="./configwebsite.html">
-              Configuring the Website
+            <a href="./configlive.html">
+              Configuring Live Connect
             </a>
           </li>
         
-          <li class="inactive">
-            <a href="./deploytoazure.html">
-              Deploying the Website to Windows Azure
+          <li class="active">
+            <a href="./configwebsite.html">
+              Configuring the Website
             </a>
           </li>
         
@@ -114,9 +115,71 @@
             </a>
           </li>
         
+          <li class="inactive">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
       </nav>
     </div>
     <div class="content">
+      <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/identityproviders.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+         
+            
+        
+      </div>
       <section>
         <article>
           <p>After you have run the sample application locally on IIS Express to verify its behavior, you may want to deploy it to Windows Azure Web Sites. This way you&#39;ll have everything hosted in the cloud.</p>
@@ -126,7 +189,7 @@
 <p>Follow the instructions in the section <strong>Deploy the application to Windows Azure</strong> on the page <a href="http://www.windowsazure.com/en-us/develop/net/tutorials/get-started">Deploying an ASP.NET Web Application to a Windows Azure Web Site</a> in the Windows Azure online documentation to deploy the sample application to your Windows Azure website.</p>
 <h3>Update the Return URL in the Access Control Service Relying Party</h3>
 <p>After Access Control Service has received the claims from its identity provider and processed any rules, it must forward the resulting set of claims to the web application that is now hosted in Windows Azure web sites.</p>
-<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/website_rp.png" alt="Updated Return URL"></p>
+<p><img src="./images/website_rp.png" alt="Updated Return URL"></p>
 <p><strong>Note:</strong> You don&#39;t need to change the <strong>Realm</strong> unless you also change the value of the <strong>audienceUris</strong> setting in the web.config file: as long as these two values match the handshake between the web application and ACS will work.</p>
 <p>You could also use this PowerShell script (available <a href="https://github.com/dominicbetts/waad-acs-sample/blob/master/scripts/ChangeReturnURL.ps1">here</a>) to change the return URL:</p>
 <pre class="highlighted"><code class="php"><span class="comment"># Prerequisites:</span>
@@ -156,6 +219,62 @@ Add-RelyingParty -RelyingParty <span class="variable">$relyingParty</span> -Mana
         </article>
       
       </section>
+            <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/identityproviders.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+         
+            
+        
+      </div>
     </div>
   </div>
 

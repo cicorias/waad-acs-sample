@@ -10,15 +10,15 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Configuring the Website | Your Website</title>
+	<title>Configuring the Website | WAAD ACS Sample</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
 	<!-- DocPad Meta -->
-	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+	<meta http-equiv="X-Powered-By" content="DocPad v6.47.0"/>
 
 	<!-- DocPad Styles + Our Own -->
-	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/fonts.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -54,6 +54,7 @@
           <p>Configuring the Website</p>
           <hr/>
     </div>
+    
   </div>
 
   <div class="wrapper">
@@ -96,15 +97,15 @@
             </a>
           </li>
         
-          <li class="inactive">
-            <a href="./configwebsite.html">
-              Configuring the Website
+          <li class="active">
+            <a href="./configlive.html">
+              Configuring Live Connect
             </a>
           </li>
         
-          <li class="active">
-            <a href="./deploytoazure.html">
-              Deploying the Website to Windows Azure
+          <li class="inactive">
+            <a href="./configwebsite.html">
+              Configuring the Website
             </a>
           </li>
         
@@ -114,30 +115,153 @@
             </a>
           </li>
         
+          <li class="active">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
       </nav>
     </div>
     <div class="content">
+      <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/configlive.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+                     <a href="/identityproviders.html" class="paging next">next &gt;</a>
+                
+         
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+      </div>
       <section>
         <article>
           <p>For this sample, the Website is a very simple ASP.NET MVC 4 web application. The Visual Studio solution was created by selecting the <strong>ASP.NET MVC 4 Web Application</strong> project template and then selecting the <strong>Intranet Application</strong> template. The project is initially configured to run on IIS Express.</p>
 <p>The following changes were made to the default project:</p>
 <ul>
 <li>The website was configured to use SSL, and the SSL address is used as the project URL.</li>
-<li>The <strong>Index</strong> action method in the <strong>HomeController</strong> class includes some code to read some claims data.</li>
+<li>The <strong>Index</strong> action method in the <strong>HomeController</strong> class includes some code to read some claims data and, if the user authenticated using a <strong>Microsoft Account</strong> it queries the Live servers for additional information such as the user&#39;s name and email address. There are a number of classes in the <strong>Utilities</strong> folder to support this logic.</li>
 <li>The website has an additional <strong>Manage</strong> view that will only display information to users in the <strong>Managers</strong> role.</li>
 <li>The website has a <strong>SignOut</strong> view and controller. The controller requires the project to have references to <strong>System.IdentityModel</strong> and <strong>System.IdentityModel.Services</strong>.</li>
 </ul>
-<p>The version of the application that you can download from this repository has not been connected to Access Control Service (ACS). You can do this using the <strong>Identity and Access</strong> dialog in Visual Studio.</p>
-<h1>Configuring Identity and Access</h1>
+<p>You must configure the application locally to use a custom domain name (such as <em>www.domcorp.com</em>) if it is going to be able to query the Live servers (see <a href="#domain">below</a>).</p>
+<p>The version of the application that you can download from this repository has not been connected to Access Control Service (ACS). You can do this using the <strong>Identity and Access</strong> dialog in Visual Studio (see <a href="#configia">below</a>).</p>
+<h1><a id="configia"></a>Configuring a custom domain name locally</h1>
+<p>You only need to perform this configuration task if you are running the web application locally using <strong>IISExpress</strong>.</p>
+<h2>1. Edit the hosts file on your local machine</h2>
+<p>The following code sample shows an example of a <strong>hosts</strong> file that maps <em>www.domcorp.com</em> to the local machine.</p>
+<pre class="highlighted"><code class="vala"><span class="preprocessor"># Copyright (c) 1993-2009 Microsoft Corp.</span>
+<span class="preprocessor">#</span>
+<span class="preprocessor"># This is a sample HOSTS file used by Microsoft TCP/IP for Windows.</span>
+<span class="preprocessor">#</span>
+<span class="preprocessor"># This file contains the mappings of IP addresses to host names. Each</span>
+<span class="preprocessor"># entry should be kept on an individual line. The IP address should</span>
+<span class="preprocessor"># be placed in the first column followed by the corresponding host name.</span>
+<span class="preprocessor"># The IP address and the host name should be separated by at least one</span>
+<span class="preprocessor"># space.</span>
+<span class="preprocessor">#</span>
+<span class="preprocessor"># Additionally, comments (such as these) may be inserted on individual</span>
+<span class="preprocessor"># lines or following the machine name denoted by a '#' symbol.</span>
+<span class="preprocessor">#</span>
+<span class="preprocessor"># For example:</span>
+<span class="preprocessor">#</span>
+<span class="preprocessor">#      102.54.94.97     rhino.acme.com          # source server</span>
+<span class="preprocessor">#       38.25.63.10     x.acme.com              # x client host</span>
+
+<span class="preprocessor"># localhost name resolution is handled within DNS itself.</span>
+<span class="preprocessor">#    127.0.0.1       localhost</span>
+<span class="preprocessor">#    ::1             localhost</span>
+<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>         www.domcorp.com</code></pre>
+<h2>2. Run Visual Studio elevated</h2>
+<p>You must run Visual Studio with administrator permissions if you are planning to use the custom domain name.</p>
+<h2>3. Edit the IISExpress applicationhosts.config file</h2>
+<p>After to you have opened the sample project in Visual Studio, you can then edit the <strong>applicationhosts.config</strong> file to use the same domain name that you configured in the <strong>hosts</strong> file.</p>
+<p>For example:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">sites</span>&gt;</span>
+    ...
+    <span class="tag">&lt;<span class="title">site</span> <span class="attribute">name</span>=<span class="value">"WAAD_ACS_Sample"</span> <span class="attribute">id</span>=<span class="value">"1"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">application</span> <span class="attribute">path</span>=<span class="value">"/"</span> <span class="attribute">applicationPool</span>=<span class="value">"Clr4IntegratedAppPool"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">virtualDirectory</span> <span class="attribute">path</span>=<span class="value">"/"</span> <span class="attribute">physicalPath</span>=<span class="value">"C:\Users\Dominic\Documents\GitHub\waad-acs-sample\apps\WAAD_ACS_Sample\WAAD_ACS_Sample"</span> /&gt;</span>
+        <span class="tag">&lt;/<span class="title">application</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">bindings</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">binding</span> <span class="attribute">protocol</span>=<span class="value">"https"</span> <span class="attribute">bindingInformation</span>=<span class="value">"*:44300:localhost"</span> /&gt;</span>
+            <span class="tag">&lt;<span class="title">binding</span> <span class="attribute">protocol</span>=<span class="value">"https"</span> <span class="attribute">bindingInformation</span>=<span class="value">"*:44300:www.domcorp.com"</span> /&gt;</span>
+        <span class="tag">&lt;/<span class="title">bindings</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">site</span>&gt;</span>
+    ...
+<span class="tag">&lt;/<span class="title">sites</span>&gt;</span></code></pre>
+<p>Notice that there is an additional <strong>https</strong> binding for the custom domain name.</p>
+<p>The <strong>applicationhosts.config</strong> file is typically located in the <strong>C:\Users\[USER]\Documents\IISExpress\config</strong> folder.</p>
+<p>The hosts file is typically located in the <strong>C:\Windows\System32\Drivers\etc\</strong> folder.</p>
+<h2>4. Ensure that the Project properties use the custom domain name</h2>
+<p>The <strong>Web</strong> panel in the project properties should look like this:</p>
+<p><img src="./images/projectproperties.png" alt="Project Web Properties"></p>
+<p>Notice that the <strong>Start URL</strong> and the <strong>Override application root URL</strong> use the custom domain name.</p>
+<h2>5. Add the Live Application details to the web.config file</h2>
+<p>You must update the <strong>LiveId:ClientId</strong> and <strong>LiveId:Secret</strong> settings in the <strong>web.config</strong> file with your Live application details. For more information, see <a href="configlive.html">Configuring Live Connect</a>.</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">appSettings</span>&gt;</span>
+  ...
+  <span class="tag">&lt;<span class="title">add</span> <span class="attribute">key</span>=<span class="value">"LiveId:ClientId"</span> <span class="attribute">value</span>=<span class="value">"[Your Windows Live Client Id]"</span> /&gt;</span>
+  <span class="tag">&lt;<span class="title">add</span> <span class="attribute">key</span>=<span class="value">"LiveId:Secret"</span> <span class="attribute">value</span>=<span class="value">"[Your Windows Live Secret]"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">appSettings</span>&gt;</span></code></pre>
+<h1><a id="configia"></a>Configuring Identity and Access</h1>
 <p>In Visual Studio, you can access the <strong>Identity and Access</strong> dialog from the project&#39;s context menu in <strong>Solution Explorer</strong>.</p>
 <p>For this application, the users come from ACS (ACS in turn gets users from WAAD before adding the <em>role</em> claim.) Then click the <strong>Configure</strong> link.</p>
-<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess01.png" alt="Identity and Access #1"></p>
+<p><img src="./images/IdentityAccess01.png" alt="Identity and Access #1"></p>
 <p>Add your ACS namespace details using the same values you used in the script described on the <a href="configacs.html">Configuring ACS</a> page.</p>
-<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess02.png" alt="Identity and Access #2"></p>
+<p><img src="./images/IdentityAccess02.png" alt="Identity and Access #2"></p>
 <p>Click <strong>OK</strong> to save your changes and update the web.config file with all the required information.</p>
-<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess03.png" alt="Identity and Access #3"></p>
+<p><img src="./images/IdentityAccess03.png" alt="Identity and Access #3"></p>
 <p>Open the <strong>Identity and Access</strong> dialog again and then click on the <strong>Configuration</strong> tab. Choose <strong>Require HTTPS</strong> to ensure that all the claims interactions with ACS are encrypted. Choose <strong>Enable web farm ready cookies</strong> to ensure that the encryption used on the cookies will work if you choose to scale the application out in Windows Azure. Click <strong>OK</strong> to save your changes.</p>
-<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/IdentityAccess04.png" alt="Identity and Access #4"></p>
+<p><img src="./images/IdentityAccess04.png" alt="Identity and Access #4"></p>
 <hr>
 <p>You can now test the web application by running it in Visual Studio. When you start debugging in Visual Studio, the web application is launched using IIS Express on your local machine. You should note the following when you run the application locally.</p>
 <ul>
@@ -145,42 +269,207 @@
 <li>You will be prompted to log on at <a href="https://login.microsoftonline.com/">https://login.microsoftonline.com/</a>. This is where your WAAD credentials can be verified. You should use either the <strong>Mary Jones</strong> or <strong>Fred Bloggs</strong> credentials you created on your domain when you ran the script described on the <a href="configwaad.html">Configuring WAAD</a> page. For example <strong>fredb@[your WAAD tenant name].onmicrosoft.com</strong>.</li>
 <li>The home page will use claim data to display a welcome message:</li>
 </ul>
-<pre class="highlighted"><code class="avrasm">public ActionResult Index()
+<pre class="highlighted"><code class="cs"><span class="keyword">public</span> ActionResult Index()
 {
-  ClaimsPrincipal <span class="keyword">cp</span> = ClaimsPrincipal<span class="preprocessor">.Current</span><span class="comment">;</span>
-  var givenNameClaim = <span class="keyword">cp</span><span class="preprocessor">.FindFirst</span>(ClaimTypes<span class="preprocessor">.GivenName</span>)<span class="comment">;</span>
-  var surnameClaim = <span class="keyword">cp</span><span class="preprocessor">.FindFirst</span>(ClaimTypes<span class="preprocessor">.Surname</span>)<span class="comment">;</span>
+  ...
 
-  if (givenNameClaim == null | surnameClaim == null)
+  ClaimsPrincipal cp = ClaimsPrincipal.Current;
+
+  ...
+
+  <span class="keyword">var</span> givenNameClaim = cp.FindFirst(ClaimTypes.GivenName);
+  <span class="keyword">var</span> surnameClaim = cp.FindFirst(ClaimTypes.Surname);
+
+  <span class="keyword">if</span> (givenNameClaim == <span class="keyword">null</span> | surnameClaim == <span class="keyword">null</span>)
   {
-    ViewBag<span class="preprocessor">.Message</span> = string<span class="preprocessor">.Format</span>(<span class="string">"Oops, no useful claims available"</span>)<span class="comment">;</span>
+    ViewBag.Message = <span class="keyword">string</span>.Format(<span class="string">"Oops, no useful claims available"</span>);
   }
-  else
+  <span class="keyword">else</span>
   {
-    string fullname =
-          string<span class="preprocessor">.Format</span>(<span class="string">"{0} {1}"</span>, givenNameClaim<span class="preprocessor">.Value</span>,
-          surnameClaim<span class="preprocessor">.Value</span>)<span class="comment">;</span>
-    ViewBag<span class="preprocessor">.Message</span> = string<span class="preprocessor">.Format</span>(<span class="string">"Dear {0}, welcome to the WAAD ACS Sample App"</span>,
-          fullname)<span class="comment">;</span>
+    <span class="keyword">string</span> fullname =
+          <span class="keyword">string</span>.Format(<span class="string">"{0} {1}"</span>, givenNameClaim.Value,
+          surnameClaim.Value);
+    ViewBag.Message = <span class="keyword">string</span>.Format(<span class="string">"Dear {0}, welcome to the WAAD ACS Sample App"</span>,
+          fullname);
   }
 
 
-  return View()<span class="comment">;</span>
+  <span class="keyword">return</span> View();
+}</code></pre>
+<ul>
+<li>The home page also includes the logic to query the Live servers if the user authenticated with a Microsoft Account to discover the user&#39;s name and email address. For more information see the sequence diagram on the <a href="overview.html">Overview</a> page.</li>
+</ul>
+<pre class="highlighted"><code class="objectivec"><span class="keyword">public</span> ActionResult Index()
+{
+  var callback = <span class="keyword">this</span><span class="variable">.HttpContext</span><span class="variable">.Request</span><span class="variable">.Url</span><span class="variable">.AbsoluteUri</span>;
+  var queryString = <span class="keyword">this</span><span class="variable">.HttpContext</span><span class="variable">.Request</span><span class="variable">.Url</span><span class="variable">.Query</span>;
+  <span class="keyword">if</span> (!String<span class="variable">.IsNullOrEmpty</span>(queryString))
+  {
+    callback = callback<span class="variable">.Replace</span>(queryString, <span class="string">""</span>);
+  }
+  ClaimsPrincipal cp = ClaimsPrincipal<span class="variable">.Current</span>;
+
+  <span class="comment">// WLID only issues Name Identifier and Identity Provider claims.</span>
+  <span class="comment">// You can access additional user information by querying the Live servers.</span>
+  <span class="comment">// This example adds this information as claims to the current principal.</span>
+  var identityprovider = cp<span class="variable">.FindFirst</span>(<span class="string">"http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider"</span>);
+  var name = cp<span class="variable">.FindFirst</span>(ClaimTypes<span class="variable">.Name</span>);
+  var authorizatonCode = <span class="keyword">this</span><span class="variable">.HttpContext</span><span class="variable">.Request</span><span class="variable">.QueryString</span>[OAuthConstants<span class="variable">.Code</span>];
+  <span class="keyword">if</span> (identityprovider != null &amp;&amp;
+    identityprovider<span class="variable">.Value</span> == <span class="string">"uri:WindowsLiveID"</span> &amp;&amp;
+    name == null)
+  {
+    <span class="comment">// Get an WLID authorization code if we haven't already got one.</span>
+    <span class="keyword">if</span> (authorizatonCode == null)
+    {
+      GetAuthorizationCodeFromLiveServers(callback);
+      <span class="keyword">return</span> null;
+    }
+
+    <span class="comment">// Now we have an authorization code we can get the User data from </span>
+    <span class="comment">// the Live servers.</span>
+    GetUserDataFromLiveServers(cp, authorizatonCode, callback);
+  }
+
+  ...
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> GetUserDataFromLiveServers(ClaimsPrincipal cp, String authorizationCode, String callback)
+{
+  OAuthToken token;
+  OAuthError error;
+  <span class="keyword">if</span> (!string<span class="variable">.IsNullOrEmpty</span>(authorizationCode))
+  {
+    <span class="comment">// Get an Access Token from the Live Servers using the Authorization Code.</span>
+    RequestAccessTokenByAuthorizationCode(callback, authorizationCode, out token, out error);
+
+    ...
+
+    <span class="comment">// Use the Access Token to request the User data.</span>
+    WLIDProfile user = GetUserData(token);
+    <span class="keyword">if</span> (user != null)
+    {
+      AddWLIDClaims(user, cp);
+    }
+  }
+}
+
+<span class="comment">// If we don't have an Authorization code, we must redirect the browser</span>
+<span class="comment">// to the Live servers.</span>
+<span class="comment">// In this scenario, the user has already authenticated. Therefore the Live</span>
+<span class="comment">// servers will redirect the browser back to this page passing the </span>
+<span class="comment">// authorization code as a query string parameter.</span>
+<span class="keyword">private</span> <span class="keyword">void</span> GetAuthorizationCodeFromLiveServers(String callback)
+{
+  string requestUrl = String<span class="variable">.Format</span>(<span class="string">"{0}?client_id={1}&amp;scope=wl.basic&amp;response_type=code&amp;redirect_uri={2}"</span>,
+    WLIDConstants<span class="variable">.OAuthAuthUrl</span>,
+    HttpUtility<span class="variable">.UrlEncode</span>(ConfigurationManager<span class="variable">.AppSettings</span>[<span class="string">"LiveId:ClientId"</span>]),
+    HttpUtility<span class="variable">.UrlEncode</span>(callback));
+  <span class="keyword">this</span><span class="variable">.HttpContext</span><span class="variable">.Response</span><span class="variable">.Redirect</span>(requestUrl, <span class="literal">true</span>);
+}
+
+<span class="comment">// Use the Access token in a GET request to the Live servers for the</span>
+<span class="comment">// user data. Copy the user data into a WLIDProfile object.</span>
+<span class="keyword">private</span> WLIDProfile GetUserData(OAuthToken token)
+{
+  WLIDError error = null;
+  WLIDProfile user = null;
+
+  string getUrl = String<span class="variable">.Format</span>(<span class="string">"{0}{1}?access_token={2}"</span>,
+    WLIDConstants<span class="variable">.ApisUrl</span>,
+    <span class="string">"me"</span>,
+    HttpUtility<span class="variable">.UrlEncode</span>(token<span class="variable">.AccessToken</span>));
+
+  HttpWebRequest request = WebRequest<span class="variable">.Create</span>(getUrl) as HttpWebRequest;
+  request<span class="variable">.Method</span> = <span class="string">"GET"</span>;
+  <span class="keyword">try</span>
+  {
+    HttpWebResponse response = request<span class="variable">.GetResponse</span>() as HttpWebResponse;
+    <span class="keyword">if</span> (response != null)
+    {
+      DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(WLIDProfile));
+      user = serializer<span class="variable">.ReadObject</span>(response<span class="variable">.GetResponseStream</span>()) as WLIDProfile;
+    }
+  }
+  <span class="keyword">catch</span> (WebException e)
+
+  ...
+
+  <span class="keyword">return</span> user;
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> RequestAccessTokenByAuthorizationCode(String callback, String authorizationCode, out OAuthToken token, out OAuthError error)
+{
+  string content = String<span class="variable">.Format</span>(<span class="string">"client_id={0}&amp;redirect_uri={1}&amp;client_secret={2}&amp;code={3}&amp;grant_type=authorization_code"</span>,
+      HttpUtility<span class="variable">.UrlEncode</span>(ConfigurationManager<span class="variable">.AppSettings</span>[<span class="string">"LiveId:ClientId"</span>]),
+      HttpUtility<span class="variable">.UrlEncode</span>(callback),
+      HttpUtility<span class="variable">.UrlEncode</span>(ConfigurationManager<span class="variable">.AppSettings</span>[<span class="string">"LiveId:Secret"</span>]),
+      HttpUtility<span class="variable">.UrlEncode</span>(authorizationCode));
+
+  RequestAccessToken(content, out token, out error);
+}
+
+<span class="comment">// Send a POST to the Live servers to get an Access token from the</span>
+<span class="comment">// Authorization code we retrieved previously.</span>
+<span class="keyword">private</span> <span class="keyword">void</span> RequestAccessToken(string postContent, out OAuthToken token, out OAuthError error)
+{
+  token = null;
+  error = null;
+
+  HttpWebRequest request = WebRequest<span class="variable">.Create</span>(WLIDConstants<span class="variable">.OAuthTokenUrl</span>) as HttpWebRequest;
+  request<span class="variable">.Method</span> = <span class="string">"POST"</span>;
+  request<span class="variable">.ContentType</span> = <span class="string">"application/x-www-form-urlencoded;charset=UTF-8"</span>;
+
+  <span class="keyword">try</span>
+  {
+    using (StreamWriter writer = new StreamWriter(request<span class="variable">.GetRequestStream</span>()))
+    {
+      writer<span class="variable">.Write</span>(postContent);
+    }
+
+    HttpWebResponse response = request<span class="variable">.GetResponse</span>() as HttpWebResponse;
+    <span class="keyword">if</span> (response != null)
+    {
+      DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OAuthToken));
+      token = serializer<span class="variable">.ReadObject</span>(response<span class="variable">.GetResponseStream</span>()) as OAuthToken;
+      <span class="keyword">if</span> (token != null)
+      {
+        <span class="keyword">return</span>;
+      }
+    }
+  }
+  <span class="keyword">catch</span> (WebException e)
+
+  ...
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> AddWLIDClaims(WLIDProfile user, ClaimsPrincipal principal)
+{
+  <span class="keyword">if</span> (principal != null &amp;&amp; principal<span class="variable">.Identity</span><span class="variable">.IsAuthenticated</span> == <span class="literal">true</span>)
+  {
+    var identityprovider = principal<span class="variable">.FindFirst</span>(<span class="string">"http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider"</span>);
+    <span class="keyword">if</span> (identityprovider != null &amp;&amp; identityprovider<span class="variable">.Value</span> == WLIDConstants<span class="variable">.IdentityProvider</span>)
+    {
+      ((ClaimsIdentity)principal<span class="variable">.Identity</span>)<span class="variable">.AddClaim</span>(new Claim(ClaimTypes<span class="variable">.GivenName</span>, user<span class="variable">.FirstName</span>));
+      ((ClaimsIdentity)principal<span class="variable">.Identity</span>)<span class="variable">.AddClaim</span>(new Claim(ClaimTypes<span class="variable">.Surname</span>, user<span class="variable">.LastName</span>));
+      ((ClaimsIdentity)principal<span class="variable">.Identity</span>)<span class="variable">.AddClaim</span>(new Claim(ClaimTypes<span class="variable">.Name</span>, user<span class="variable">.Name</span>));
+    }
+  }
 }</code></pre>
 <ul>
 <li>The <strong>Manage</strong> page uses the <strong>Managers</strong> role to determine what to display (the role is obtained automatically from the user&#39;s claims):</li>
 </ul>
-<pre class="highlighted"><code class="objectivec"><span class="keyword">public</span> ActionResult Manage()
+<pre class="highlighted"><code class="cs"><span class="keyword">public</span> ActionResult Manage()
 {
-  ViewBag<span class="variable">.Authorized</span> = <span class="literal">false</span>;
-  <span class="keyword">if</span> (!User<span class="variable">.IsInRole</span>(<span class="string">"Managers"</span>))
+  ViewBag.Authorized = <span class="keyword">false</span>;
+  <span class="keyword">if</span> (!User.IsInRole(<span class="string">"Managers"</span>))
   {
-    ViewBag<span class="variable">.Message</span> = <span class="string">"You are not authorized for this page!"</span>;
+    ViewBag.Message = <span class="string">"You are not authorized for this page!"</span>;
   }
   <span class="keyword">else</span>
   {
-    ViewBag<span class="variable">.Authorized</span> = <span class="literal">true</span>;
-    ViewBag<span class="variable">.Message</span> = <span class="string">"Your managers only page."</span>;
+    ViewBag.Authorized = <span class="keyword">true</span>;
+    ViewBag.Message = <span class="string">"Your managers only page."</span>;
   }
 
   <span class="keyword">return</span> View();
@@ -189,6 +478,64 @@
         </article>
       
       </section>
+            <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/configlive.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+                     <a href="/identityproviders.html" class="paging next">next &gt;</a>
+                
+         
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+      </div>
     </div>
   </div>
 

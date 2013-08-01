@@ -10,15 +10,15 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Configuring ACS | Your Website</title>
+	<title>Configuring ACS | WAAD ACS Sample</title>
 	<meta name="description" content="A simple example that illustrates how you can use Windows Azure Active Directory (WAAD) and Access Control Service (ACS) to provide both authentication and authorization services to a website hosted using Windows Azure Websites. In brief, a user of the web site will be able to authenticate using either WAAD or another online ID (such as a Microsoft or Google account), rules in ACS will determine the user's role membership, and the website will use the role to control access to pages within the site." />
 	<meta name="keywords" content="azure windows active directory access control service WAAD ACS identity authentication authorization" />
 
 	<!-- DocPad Meta -->
-	<meta http-equiv="X-Powered-By" content="DocPad v6.46.5"/>
+	<meta http-equiv="X-Powered-By" content="DocPad v6.47.0"/>
 
 	<!-- DocPad Styles + Our Own -->
-	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
+	<link  rel="stylesheet" href="./vendor/normalize.css" /><link  rel="stylesheet" href="./vendor/h5bp.css" /><link  rel="stylesheet" href="./styles/style.css" /><link  rel="stylesheet" href="./vendor/fonts.css" /><link  rel="stylesheet" href="./vendor/tomorrow-night-bright.css" />
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -54,6 +54,7 @@
           <p>Configuring ACS</p>
           <hr/>
     </div>
+    
   </div>
 
   <div class="wrapper">
@@ -97,14 +98,14 @@
           </li>
         
           <li class="active">
-            <a href="./configwebsite.html">
-              Configuring the Website
+            <a href="./configlive.html">
+              Configuring Live Connect
             </a>
           </li>
         
           <li class="active">
-            <a href="./deploytoazure.html">
-              Deploying the Website to Windows Azure
+            <a href="./configwebsite.html">
+              Configuring the Website
             </a>
           </li>
         
@@ -114,9 +115,73 @@
             </a>
           </li>
         
+          <li class="active">
+            <a href="./deploytoazure.html">
+              Deploying the Website to Windows Azure
+            </a>
+          </li>
+        
       </nav>
     </div>
     <div class="content">
+      <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/configwaad.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+                     <a href="/configlive.html" class="paging next">next &gt;</a>
+                
+         
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+      </div>
       <section>
         <article>
           <p>After you have created your Windows Azure Active Directory (WAAD) tenant as described on the <a href="config.html">Initial configuration tasks</a>, and added some users and defined a Service Principal as described on the <a href="configwaad.html">Configuring WAAD</a> page, you can complete the setup of your Access Control Services (ACS) namespace.</p>
@@ -128,13 +193,13 @@
 </ul>
 <p>In addition to your WAAD tenant name, ACS namespace name, and the credentials of your global administrator, you also need your ACS Management key to run this script. You can find this key in the Windows Azure Management Portal.</p>
 <p>Click on the <strong>Manage</strong> link on the <strong>Access Control Namespaces</strong> page.
-<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey1.png" alt="Find ACS Management Key Step 1"></p>
+<img src="./images/ACSKey1.png" alt="Find ACS Management Key Step 1"></p>
 <p>Then click on the <strong>ManagementClient</strong> link on the <strong>Management Service</strong> page.
-<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey2.png" alt="Find ACS Management Key Step 2"></p>
+<img src="./images/ACSKey2.png" alt="Find ACS Management Key Step 2"></p>
 <p>Then click on the <strong>Password</strong> link.
-<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey3.png" alt="Find ACS Management Key Step 3"></p>
+<img src="./images/ACSKey3.png" alt="Find ACS Management Key Step 3"></p>
 <p>You can then find the password to use as your ACS Management Key.
-<img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACSKey4.png" alt="Find ACS Management Key Step 4"></p>
+<img src="./images/ACSKey4.png" alt="Find ACS Management Key Step 4"></p>
 <p>This PowerShell script is included in the repository <a href="https://github.com/dominicbetts/waad-acs-sample/blob/master/scripts/ACSConfig.ps1">here</a>.</p>
 <p>This script:</p>
 <ul>
@@ -174,7 +239,8 @@
 <span class="variable">$WAADTenantId</span> = (<span class="constant">Get</span>-<span class="constant">MsolCompanyInformation</span> | <span class="constant">Select</span> -<span class="constant">ExpandProperty</span> <span class="constant">ObjectId</span>).<span class="constant">ToString</span>()
 <span class="variable">$WAADFederationMetaDataAddress</span> = <span class="string">"https://login.windows.net/$WAADTenantId/federationmetadata/2007-06/federationmetadata.xml"</span>
 <span class="variable">$FedFile</span> = <span class="string">'C:\Temp\federationmetadata.xml'</span>
-<span class="variable">$AppAddress</span> = <span class="string">'https://localhost:44300/'</span>
+<span class="variable">$AppIdentity</span> = <span class="string">'https://localhost:44300/'</span>
+<span class="variable">$AppAddress</span> = <span class="string">'https://www.domcorp.com:44300/'</span>
 <span class="variable">$RelyingPartyName</span> = <span class="string">'MyWebApp'</span>
 <span class="variable">$IdentityProviderName</span> = <span class="string">'WAAD'</span>
 <span class="variable">$RuleGroupName</span> = <span class="string">'WAADRuleGroup'</span>
@@ -182,7 +248,7 @@
 <span class="comment">#  Configure an Identity Provider, a Relying Party, and a Rule Group in your ACS Namespace</span>
 <span class="constant">Invoke</span>-<span class="constant">WebRequest</span> -<span class="constant">Uri</span> <span class="variable">$WAADFederationMetaDataAddress</span> -<span class="constant">OutFile</span> <span class="variable">$FedFile</span>
 <span class="constant">Add</span>-<span class="constant">IdentityProvider</span> -<span class="constant">Type</span> <span class="constant">WsFederation</span> -<span class="constant">WsFederationMetadata</span> <span class="variable">$FedFile</span> -<span class="constant">AllowedRelyingParties</span> <span class="variable">$RelyingPartyName</span> -<span class="constant">LoginLinkText</span> <span class="string">"WAAD Login"</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Name</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span>
-<span class="constant">Add</span>-<span class="constant">RelyingParty</span> -<span class="constant">Name</span> <span class="variable">$RelyingPartyName</span> -<span class="constant">AllowedIdentityProviders</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">Realm</span> <span class="variable">$AppAddress</span> -<span class="constant">ReturnUrl</span> <span class="variable">$AppAddress</span> -<span class="constant">TokenFormat</span> <span class="constant">SAML_2_0</span> -<span class="constant">RuleGroupName</span> <span class="variable">$RuleGroupName</span>
+<span class="constant">Add</span>-<span class="constant">RelyingParty</span> -<span class="constant">Name</span> <span class="variable">$RelyingPartyName</span> -<span class="constant">AllowedIdentityProviders</span> @(<span class="variable">$IdentityProviderName</span>) -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">Realm</span> <span class="variable">$AppIdentity</span> -<span class="constant">ReturnUrl</span> <span class="variable">$AppAddress</span> -<span class="constant">TokenFormat</span> <span class="constant">SAML_2_0</span> -<span class="constant">RuleGroupName</span> <span class="variable">$RuleGroupName</span>
 <span class="constant">Add</span>-<span class="constant">DefaultPassthroughRules</span> -<span class="constant">GroupName</span> <span class="variable">$RuleGroupName</span> -<span class="constant">IdentityProviderName</span> <span class="variable">$IdentityProviderName</span>  -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span>
 <span class="constant">Add</span>-<span class="constant">Rule</span> -<span class="constant">GroupName</span> <span class="variable">$RuleGroupName</span> -<span class="constant">IdentityProviderName</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">Description</span> <span class="string">"Assign Mary Jones to the Managers role"</span> -<span class="constant">InputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.xmlsoap.org/ws</span><span class="regexp">/2005/</span><span class="number">05</span>/identity/claims/name -<span class="constant">InputClaimValue</span> <span class="string">"maryj@$WAADName.onmicrosoft.com"</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">OutputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.microsoft.com/ws</span><span class="regexp">/2008/</span><span class="number">06</span>/identity/claims/role -<span class="constant">OutputClaimValue</span> <span class="constant">Managers</span>
 <span class="constant">Add</span>-<span class="constant">Rule</span> -<span class="constant">GroupName</span> <span class="variable">$RuleGroupName</span> -<span class="constant">IdentityProviderName</span> <span class="variable">$IdentityProviderName</span> -<span class="constant">Description</span> <span class="string">"Assign Fred Bloggs to the Users role"</span> -<span class="constant">InputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.xmlsoap.org/ws</span><span class="regexp">/2005/</span><span class="number">05</span>/identity/claims/name -<span class="constant">InputClaimValue</span> <span class="string">"fredb@$WAADName.onmicrosoft.com"</span> -<span class="constant">ManagementKey</span> <span class="variable">$ACSManagementkey</span> -<span class="constant">Namespace</span> <span class="variable">$ACSNamespace</span> -<span class="constant">OutputClaimType</span> <span class="symbol">http:</span>/<span class="regexp">/schemas.microsoft.com/ws</span><span class="regexp">/2008/</span><span class="number">06</span>/identity/claims/role -<span class="constant">OutputClaimValue</span> <span class="constant">Users</span>
@@ -195,11 +261,69 @@
 <span class="comment"># Remove-IdentityProvider -Name $IdentityProviderName -ManagementKey $ACSManagementkey -Namespace $ACSNamespace</span></code></pre>
 <hr>
 <p>You can view the results of running this script in the Windows Azure Management Portal. You will also see that Windows Live ID is already included as an identity provider.</p>
-<p><img src="https://raw.github.com/dominicbetts/waad-acs-sample/master/images/ACS.png" alt="ACS Management"></p>
+<p><img src="./images/ACS.png" alt="ACS Management"></p>
 
         </article>
       
       </section>
+            <div id="paging">
+      <!-- Get the next and previous document from the current document -->
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+         
+                <!-- We have the current document, do the next and previous buttons -->
+                
+                <!-- Check if we have a previous page -->
+                
+                    <a href="/configwaad.html" class="paging previous">&lt; previous</a>
+                
+         
+                <!-- Check if we have a next page -->
+                
+                     <a href="/configlive.html" class="paging next">next &gt;</a>
+                
+         
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+            
+            <!-- Get the current document, from there, we will be able to get the next and previous -->
+            
+        
+      </div>
     </div>
   </div>
 
